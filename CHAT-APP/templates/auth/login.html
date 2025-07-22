@@ -1,0 +1,96 @@
+{% extends "base_auth.html" %}
+
+{% block title %}Sign In - VIJAY'S CHAT APP{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card bg-dark border shadow-lg">
+                <div class="card-header text-center">
+                    <h3 class="mb-0">
+                        <i data-feather="log-in" class="me-2"></i>
+                        Sign In
+                    </h3>
+                    <p class="text-muted mb-0">Access your secure messages</p>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="mb-3">
+                            {{ form.username.label(class="form-label") }}
+                            {{ form.username() }}
+                            {% if form.username.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.username.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form.password.label(class="form-label") }}
+                            <div class="position-relative">
+                                {{ form.password() }}
+                                <button type="button" class="btn btn-sm position-absolute top-50 end-0 translate-middle-y me-2" 
+                                        onclick="togglePassword()" style="border: none; background: none;">
+                                    <i data-feather="eye" id="password-eye" style="width: 16px; height: 16px;"></i>
+                                </button>
+                            </div>
+                            {% if form.password.errors %}
+                                <div class="text-danger small">
+                                    {% for error in form.password.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            {{ form.remember_me() }}
+                            {{ form.remember_me.label(class="form-check-label") }}
+                        </div>
+                        
+                        <div class="d-grid">
+                            {{ form.submit() }}
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <p class="mb-0">
+                        Don't have an account? 
+                        <a href="{{ url_for('auth.register') }}" class="text-primary">Sign Up</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Security Notice -->
+            <div class="alert alert-info mt-3" role="alert">
+                <i data-feather="shield" class="me-2" style="width: 18px; height: 18px;"></i>
+                <strong>Secure Login:</strong> All communications are encrypted and your privacy is protected.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const eyeIcon = document.getElementById('password-eye');
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.setAttribute('data-feather', 'eye-off');
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.setAttribute('data-feather', 'eye');
+    }
+    
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+}
+</script>
+{% endblock %}
