@@ -1,0 +1,87 @@
+{% extends "base_auth.html" %}
+
+{% block title %}Welcome to VIJAY'S CHAT APP{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+            <div class="bg-dark p-5 rounded border shadow-lg">
+                <i data-feather="shield" style="width: 64px; height: 64px;" class="mb-3 text-primary"></i>
+                <h1 class="display-4 mb-3">VIJAY'S CHAT APP</h1>
+                <p class="lead mb-4">
+                    Secure messaging platform with end-to-end encryption. 
+                    Your conversations are protected with military-grade Fernet encryption.
+                </p>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">
+                        <i data-feather="user-plus" class="me-2"></i>
+                        Create Account
+                    </a>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-lg">
+                        <i data-feather="log-in" class="me-2"></i>
+                        Sign In
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="card bg-dark border h-100">
+                <div class="card-body text-center">
+                    <i data-feather="lock" style="width: 48px; height: 48px;" class="mb-3 text-success"></i>
+                    <h5 class="card-title">End-to-End Encryption</h5>
+                    <p class="card-text text-muted">
+                        All messages are encrypted using Fernet symmetric encryption before storage. 
+                        Your data is always protected.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card bg-dark border h-100">
+                <div class="card-body text-center">
+                    <i data-feather="users" style="width: 48px; height: 48px;" class="mb-3 text-info"></i>
+                    <h5 class="card-title">User Authentication</h5>
+                    <p class="card-text text-muted">
+                        Secure user accounts with proper authentication. 
+                        Only you can access your messages.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card bg-dark border h-100">
+                <div class="card-body text-center">
+                    <i data-feather="database" style="width: 48px; height: 48px;" class="mb-3 text-warning"></i>
+                    <h5 class="card-title">Secure Storage</h5>
+                    <p class="card-text text-muted">
+                        Messages stored with PostgreSQL database. 
+                        No plaintext data is ever stored on our servers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Information -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+            <div class="alert alert-info" role="alert">
+                <h5 class="alert-heading">
+                    <i data-feather="info" class="me-2"></i>
+                    How It Works
+                </h5>
+                <p class="mb-0">
+                    When you send a message, it's immediately encrypted using the Fernet cipher before being stored in our database. 
+                    Messages are only decrypted when displayed to you - ensuring complete privacy and security.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

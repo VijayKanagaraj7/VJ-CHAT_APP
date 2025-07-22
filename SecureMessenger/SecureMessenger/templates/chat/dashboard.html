@@ -1,0 +1,110 @@
+{% extends "base_chat.html" %}
+
+{% block title %}Dashboard - VIJAY'S CHAT APP{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <!-- Dashboard Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="h2">
+                <i data-feather="home" class="me-2"></i>
+                Dashboard
+            </h1>
+            <p class="text-muted">Welcome to your secure messaging dashboard, {{ current_user.get_full_name() }}!</p>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-dark border">
+                <div class="card-body text-center">
+                    <i data-feather="message-square" style="width: 32px; height: 32px;" class="mb-2 text-primary"></i>
+                    <h5 class="card-title">Chat Room</h5>
+                    <p class="card-text small text-muted">Send encrypted messages</p>
+                    <a href="{{ url_for('chat.index') }}" class="btn btn-primary btn-sm">Go to Chat</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-dark border">
+                <div class="card-body text-center">
+                    <i data-feather="archive" style="width: 32px; height: 32px;" class="mb-2 text-info"></i>
+                    <h5 class="card-title">My Messages</h5>
+                    <p class="card-text small text-muted">View your message history</p>
+                    <a href="{{ url_for('chat.my_messages') }}" class="btn btn-info btn-sm">View Messages</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-dark border">
+                <div class="card-body text-center">
+                    <i data-feather="settings" style="width: 32px; height: 32px;" class="mb-2 text-warning"></i>
+                    <h5 class="card-title">Profile</h5>
+                    <p class="card-text small text-muted">Update account settings</p>
+                    <a href="{{ url_for('auth.profile') }}" class="btn btn-warning btn-sm">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card bg-dark border">
+                <div class="card-body text-center">
+                    <i data-feather="shield" style="width: 32px; height: 32px;" class="mb-2 text-success"></i>
+                    <h5 class="card-title">Security</h5>
+                    <p class="card-text small text-muted">Encryption status</p>
+                    <span class="badge bg-success">Active</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card bg-dark border">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i data-feather="activity" class="me-2"></i>
+                        Account Statistics
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Username:</strong> {{ current_user.username }}</p>
+                            <p><strong>Email:</strong> {{ current_user.email }}</p>
+                            <p><strong>Member Since:</strong> {{ current_user.created_at.strftime("%B %d, %Y") }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Account Status:</strong> <span class="badge bg-success">Active</span></p>
+                            {% if current_user.last_login %}
+                            <p><strong>Last Login:</strong> {{ current_user.last_login.strftime("%Y-%m-%d %H:%M") }}</p>
+                            {% endif %}
+                            <p><strong>Encryption:</strong> <span class="text-success">✓ Enabled</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card bg-dark border">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i data-feather="info" class="me-2"></i>
+                        Security Notice
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info mb-0" role="alert">
+                        <small>
+                            Your messages are protected with Fernet encryption. 
+                            All data is encrypted before storage and only decrypted for display.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
